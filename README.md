@@ -1,4 +1,4 @@
-# supermarket
+# 效仿B站王元红老师的模仿蘑菇街电商vue项目(70%)
 
 ## Project setup
 ```
