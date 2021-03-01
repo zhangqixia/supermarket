@@ -9,7 +9,7 @@
       </div>
       <div class="item-info">
           <div class="item-title">{{product.title}}</div>
-          <div class="item-desc">{{product.desc}}</div>
+          <div class="item-desc">型号:{{product.size}}</div>
           <div class="info-bottom">
               <div class="item-price left">¥{{product.reaprice}}</div>
               <div class="item-count right">×{{product.count}}</div>

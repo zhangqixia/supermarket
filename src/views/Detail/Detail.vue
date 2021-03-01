@@ -12,6 +12,12 @@
       </scroll>
       <back-top @click.native="backclick" v-show="showbacktop"></back-top>
       <detail-bottom-bar @addcart="addtocart"></detail-bottom-bar>
+      <choose-info
+       v-if="this.ischoose"
+       :choosegoods="products"
+       :titles="titles"
+       @goback="goback"
+       ></choose-info>
   </div>
 </template>
 
@@ -27,6 +33,8 @@ import GoodsItem from 'components/conent/Goods/Goodsitem.vue'
 import DetailBottomBar from './childcomponents/DetailBottomBar.vue'
 import DetailRecomendInfo from './childcomponents/DetailRecomendInfo'
 import BackTop from 'conent/BackTop/BackTop.vue'
+// import Toast from 'common/toast/Toast.vue'
+import ChooseInfo from './childcomponents/Chooseinfo.vue'
 
 import Scroll from 'components/common/scroll/Scroll.vue'
 
@@ -47,7 +55,10 @@ export default {
             recommend: [],
             themesYs: [],
             getThemesY: null,
-            currentIndex: 0
+            currentIndex: 0,
+            products: {},
+            ischoose: false,
+            titles: ['S','M','L','XL','XXL']
         }
     },
     mixins: [itemlistermixin],
@@ -64,7 +75,9 @@ export default {
         GoodsItem,
         DetailRecomendInfo,
         DetailBottomBar,
-        BackTop
+        BackTop,
+        ChooseInfo
+        // Toast
     },
     created() {
         //
@@ -134,6 +147,7 @@ export default {
             this.recommend = res.data.data.list
             //console.log(this.recommend)
         })
+
     },
     destroyed() {
         //取消监听图片加载
@@ -173,7 +187,7 @@ export default {
             this.showbacktop = (-position.y) > 600
         },
         addtocart() {
-            // console.log('addtocart')
+            this.ischoose = true
             const product = {}
             //title,desc,reaprice,topimage[0]
             product.iid = this.$route.params.iid;
@@ -182,9 +196,10 @@ export default {
             product.reaprice = this.goods.reaprice
             product.topimage = this.topimage[0]
             product.ischecked = true
-            //console.log(product)
-
-            this.$store.commit('addCart',product)
+            this.products = product
+        },
+        goback() {
+            this.ischoose = false
         }
     }
 

@@ -16,7 +16,7 @@
         </div>
         <div class="bar-item item-right">
             <div class="cart" @click="addcart">加入购物车</div>
-            <div class="buy">购买</div>
+            <div class="buy" @click="gobuy">购买</div>
         </div>
     </div>
 </template>
@@ -27,6 +27,9 @@ export default {
     methods: {
         addcart() {
             this.$emit('addcart')
+        },
+        gobuy() {
+            this.$toast.show('即将跳转支付页面',1500)
         }
     }
 }
